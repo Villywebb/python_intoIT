@@ -23,6 +23,6 @@ q1 = quadruple(a) #12
 q2 = quadruple(b) #56
 
 f1 = funky(a, b) #65
-f2 = funky(b, a) #54, Här står det fel i uppgiften. 14*3+3*4=54 vilket är det förväntade värdet.. Inte 98
+f2 = funky(b, b) #98
 
 print(f'Dubbla a: {d1}\nDubbla b: {d2}\nTrippla a: {t1}\nTrippla b: {t2}\nQuadrupla a: {q1}\nQuadrupla b: {q2}\nFunkey a, b: {f1}\nFunky b, a: {f2}')
