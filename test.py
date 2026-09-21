@@ -4,4 +4,4 @@ for element in arr:
     print(element)
 print("bernie kan du se detta")
 
-Hej = 5
+Hej = 10
