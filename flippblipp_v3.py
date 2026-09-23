@@ -6,7 +6,7 @@ def flippblipp(n):
     elif(n % 5 == 0):
         return "blipp"
     else:
-        return str(n)
+        return str(i)
 
 
 n = 5
