@@ -1,15 +1,20 @@
 def flippblipp(n):
-    if(n % 3 == 0 and n % 5 == 0):
-        return "flipp blipp"
-    elif(n % 3 == 0):
-        return "flipp"
-    elif(n % 5 == 0):
-        return "blipp"
-    else:
-        return str(i)
+    text = ""
+    if n % 3 == 0: text += "flipp"    
+    if n % 5 == 0:
+        if text != "":
+            text += " "
+        text += "blipp"
+    if text == "": return str(n)
+    else: return text
 
-print("hur många tal? ")
-n = int(input())
-for i in range(1,n+1):
-    print(flippblipp(i))
-
+print("      ",1)
+i = 2
+while True:
+    print("Nästa: ",end = "")
+    ans = flippblipp(i)
+    if input() != ans:
+        print("Fel -",ans,"\n")
+        print("Game Over")
+        break
+    i+=1
