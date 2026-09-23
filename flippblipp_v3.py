@@ -1,23 +1,20 @@
 def flippblipp(n):
-    if(n % 3 == 0 and n % 5 == 0):
-        return "flipp blipp"
-    elif(n % 3 == 0):
-        return "flipp"
-    elif(n % 5 == 0):
-        return "blipp"
-    else:
-        return str(i)
+    text = ""
+    if n % 3 == 0: text += "flipp"    
+    if n % 5 == 0:
+        if text != "":
+            text += " "
+        text += "blipp"
+    if text == "": return str(n)
+    else: return text
 
-
-n = 5
-print(1)
+print("      ",1)
 i = 2
 while True:
-    print("Nästa: ", end = "")
-    answer = flippblipp(i)
-    if str(input()) != answer:
-        print("Fel - " + answer)
-        print()
+    print("Nästa: ",end = "")
+    ans = flippblipp(i)
+    if input() != ans:
+        print("Fel -",ans,"\n")
         print("Game Over")
         break
-    i = i + 1
+    i+=1
