@@ -1,13 +1,13 @@
 from random import randint
 SHOTS = 5
 HITCHANCE = 65 #chance of hitting target in percent
-players = []
 
 class Player:
     def __init__(self,name,board,hits):
         self.name = name
         self.playerBoard = board
         self.hits = hits
+    #not sure if getters are standard in python?
     def getHits(self):return self.hits
     def getBoard(self):return self.playerBoard
     def getName(self):return self.name
@@ -30,11 +30,9 @@ def start(board):
     printStart()
     printBoard(board)
 
-
 def game():
     board = [1,1,1,1,1]
     start(board)
-
     hits = 0
     for i in range(1, SHOTS + 1):
         while True:
@@ -47,7 +45,7 @@ def game():
                     print("\nWRITE BETWEEN 1 - 5")
             except(ValueError):
                 print("\nWRITE AN INTEGER")
-        if randint(0,100) < HITCHANCE: #TODO change so hitchance gets affected after each round
+        if randint(1,100) <= HITCHANCE: #TODO change so hitchance gets affected after each round
             if(board[target-1] != 0):
                 print("\nHit on an open target")
                 board[target-1] = 0
@@ -57,15 +55,17 @@ def game():
         else:
             print("\nMiss")
         printBoard(board)
-    print("You hit",hits,"of 5")
+    print("You hit",hits,"of",SHOTS)
     print("What's your name? ",end="")  
-    players.append(Player(input(),board,hits))
+    return Player(input(),board,hits)
 
 def askPlayerAmount():
     while True:
         try:
             print("How many players? ",end="")
-            return int(input())
+            amount = int(input())
+            if amount > 0:return amount
+            else: print("AT LEAST 1 PLAYER")
         except(ValueError):
             print("INTEGERS ONLY")
 
@@ -74,12 +74,12 @@ def askPlayAgain():
     if input().capitalize() == "Y":return True
     else: return False
 
-def printResults():
+def printResults(players):
     print()
     for p in players:
         print(p.getName()," --- ",p.getBoard()," --- ", p.getHits())
 
-def printWinner():
+def printWinner(players):
     highScore = max(p.getHits() for p in players)
     highPlayers = [p for p in players if p.getHits() == highScore]
   
@@ -89,14 +89,13 @@ def printWinner():
         names = ", ".join(p.getName() for p in highPlayers)
         print(f"ITS A TIE BETWEEEN: {names}")
 
-
 def gameRunner():
     while True:
-        players.clear()
+        players = []
         for p in range(askPlayerAmount()):
-            game()
-        printResults()
-        printWinner()
+            players.append(game())
+        printResults(players)
+        printWinner(players)
         if(not askPlayAgain()):
             break
 
