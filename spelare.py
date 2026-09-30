@@ -25,7 +25,9 @@ class person:
         sträng_träffyta = self.tavla(oträffade, target)
         print(f'Detta är ditt {antal_skott} skott')
         print(f'Tavlan ser ut såhär\n{sträng_träffyta}\nDär 1 är träffade och noll är oträffade')
-        sikte = int(input("Vilket mål 1-5 vill du skjuta (1-5 i siffror)")) -1
+        import hjälp_funktioner
+        i = "Vilket mål 1-5 vill du skjuta (1-5 i siffror)"
+        sikte = hjälp_funktioner.välj_sifrra(i, 1, 5, inte=True) -1
         if target[sikte] in oträffade:
             print(self.chans)
             chans = random.random()
