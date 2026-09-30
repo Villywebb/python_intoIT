@@ -55,8 +55,8 @@ def game():
         else:
             print("\nMiss")
         printBoard(board)
-    print("You hit",hits,"of",SHOTS)
-    print("What's your name? ",end="")  
+    print("\nYou hit",hits,"of",SHOTS)
+    print("\nWhat's your name? ",end="")  
     return Player(input(),board,hits)
 
 def askPlayerAmount():
@@ -92,7 +92,7 @@ def printWinner(players):
 def gameRunner():
     while True:
         players = []
-        for p in range(askPlayerAmount()):
+        for _ in range(askPlayerAmount()):
             players.append(game())
         printResults(players)
         printWinner(players)
