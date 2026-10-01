@@ -1,13 +1,26 @@
 from random import randint
 SHOTS = 5
+BOARD_SIZE = 5
 HITCHANCE = 65 #chance of hitting target in percent
 
 class Player:
-    def __init__(self,name,board,hits):
+    #TODO: Implement own hitchance variable
+    def __init__(self,name):
         self.name = name
-        self.board = board
-        self.hits = hits
-    
+        self.board = BOARD_SIZE * [1]
+        self.hits = 0
+        
+    def shoot(self,target):
+        if randint(1,100) <= HITCHANCE:
+            if(self.board[target-1] != 0):
+                self.board[target-1] = 0
+                self.hits+=1
+                return "hit_open"
+            else:
+                return "hit_closed"
+        else:
+            return "miss"
+       
 def printStart():
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print("             Biathlon\n")
@@ -16,7 +29,8 @@ def printStart():
     print("\nYou got",SHOTS,"shots\n")
 
 def printBoard(board):
-    print("\n1 2 3 4 5")
+    text = " ".join(str(i) for i in range(1,len(board)+1))
+    print(f"\n{text}")
     for b in board:
         if b == 1:print("*","",end="")
         else:print(b,"",end="")
@@ -26,34 +40,33 @@ def start(board):
     printStart()
     printBoard(board)
 
-def game():
-    board = [1,1,1,1,1]
-    start(board)
-    hits = 0
-    for i in range(1, SHOTS + 1):
-        while True:
-            try:
-                print("\nShot nr",i,"at: ",end="")
-                target = int(input())
-                if target <=5 and target >= 1:
-                    break
-                else:
-                    print("\nWRITE BETWEEN 1 - 5")
-            except(ValueError):
-                print("\nWRITE AN INTEGER")
-        if randint(1,100) <= HITCHANCE: #TODO change so hitchance gets affected after each round
-            if(board[target-1] != 0):
-                print("\nHit on an open target")
-                board[target-1] = 0
-                hits+=1
+def askTarget(i):
+    while True:
+        try:
+            print("\nShot nr",i,"at: ",end="")
+            target = int(input())
+            if target <=BOARD_SIZE and target > 0:
+                break
             else:
-                print("\nHit on closed target")
-        else:
-            print("\nMiss")
-        printBoard(board)
-    print("\nYou hit",hits,"of",SHOTS)
-    print("\nWhat's your name? ",end="")  
-    return Player(input(),board,hits)
+                print("\nWRITE BETWEEN 1 -",BOARD_SIZE)
+        except(ValueError):
+            print("\nWRITE AN INTEGER")
+    return target
+
+def game(p):
+    start(p.board)
+    for i in range(1, SHOTS + 1):
+        
+        target = askTarget(i)
+        shotStatus = p.shoot(target)
+        if shotStatus == "hit_open": print("\nHit on an open target")
+        elif shotStatus == "hit_closed": print("\nHit on closed target")
+        elif shotStatus == "miss": print("\nMiss")
+        else: raise ValueError("Issue with shotStatus")
+
+        printBoard(p.board)
+
+    print("\nYou hit",p.hits,"of",SHOTS)
 
 def askPlayerAmount():
     while True:
@@ -85,11 +98,17 @@ def printWinner(players):
         names = ", ".join(p.name for p in highPlayers)
         print(f"ITS A TIE BETWEEEN: {names}")
 
+def askPlayer():
+    print("What's your name? ",end="")
+    return input()
+
 def gameRunner():
     while True:
         players = []
         for _ in range(askPlayerAmount()):
-            players.append(game())
+            p = Player(askPlayer())
+            game(p)
+            players.append(p)
         printResults(players)
         printWinner(players)
         if(not askPlayAgain()):
