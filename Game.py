@@ -5,12 +5,8 @@ HITCHANCE = 65 #chance of hitting target in percent
 class Player:
     def __init__(self,name,board,hits):
         self.name = name
-        self.playerBoard = board
+        self.board = board
         self.hits = hits
-    #not sure if getters are standard in python?
-    def getHits(self):return self.hits
-    def getBoard(self):return self.playerBoard
-    def getName(self):return self.name
     
 def printStart():
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -71,22 +67,22 @@ def askPlayerAmount():
 
 def askPlayAgain():
     print("\nPlay again? (y/n) ",end="")
-    if input().capitalize() == "Y":return True
+    if input().lower() == "y":return True
     else: return False
 
 def printResults(players):
     print()
     for p in players:
-        print(p.getName()," --- ",p.getBoard()," --- ", p.getHits())
+        print(p.name," --- ",p.board," --- ", p.hits)
 
 def printWinner(players):
-    highScore = max(p.getHits() for p in players)
-    highPlayers = [p for p in players if p.getHits() == highScore]
+    highScore = max(p.hits for p in players)
+    highPlayers = [p for p in players if p.hits == highScore]
   
     if len(highPlayers) == 1:
-        print(f"THE WINNER IS: {highPlayers[0].getName()}!!!")
+        print(f"THE WINNER IS: {highPlayers[0].name}!!!")
     else:
-        names = ", ".join(p.getName() for p in highPlayers)
+        names = ", ".join(p.name for p in highPlayers)
         print(f"ITS A TIE BETWEEEN: {names}")
 
 def gameRunner():
