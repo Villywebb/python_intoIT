@@ -4,7 +4,6 @@ BOARD_SIZE = 5
 HITCHANCE = 65 #chance of hitting target in percent
 
 class Player:
-    #TODO: Implement own hitchance variable
     def __init__(self,name):
         self.name = name
         self.board = BOARD_SIZE * [1]
@@ -32,8 +31,10 @@ def printBoard(board):
     text = " ".join(str(i) for i in range(1,len(board)+1))
     print(f"\n{text}")
     for b in board:
-        if b == 1:print("*","",end="")
-        else:print(b,"",end="")
+        if b == 1:
+            print("*","",end="")
+        else:
+            print(b,"",end="")
     print()
 
 def start(board):
@@ -59,10 +60,14 @@ def game(p):
         
         target = askTarget(i)
         shotStatus = p.shoot(target)
-        if shotStatus == "hit_open": print("\nHit on an open target")
-        elif shotStatus == "hit_closed": print("\nHit on closed target")
-        elif shotStatus == "miss": print("\nMiss")
-        else: raise ValueError("Issue with shotStatus")
+        if shotStatus == "hit_open":
+            print("\nHit on an open target")
+        elif shotStatus == "hit_closed":
+            print("\nHit on closed target")
+        elif shotStatus == "miss":
+            print("\nMiss")
+        else: 
+            raise ValueError("Issue with shotStatus")
 
         printBoard(p.board)
 
@@ -73,15 +78,19 @@ def askPlayerAmount():
         try:
             print("How many players? ",end="")
             amount = int(input())
-            if amount > 0:return amount
-            else: print("AT LEAST 1 PLAYER")
+            if amount > 0:
+                return amount
+            else: 
+                print("AT LEAST 1 PLAYER")
         except(ValueError):
             print("INTEGERS ONLY")
 
 def askPlayAgain():
     print("\nPlay again? (y/n) ",end="")
-    if input().lower() == "y":return True
-    else: return False
+    if input().lower() == "y":
+        return True
+    else: 
+        return False
 
 def printResults(players):
     print()

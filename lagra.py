@@ -34,13 +34,17 @@ def list_items(user:User):
     for i,item in enumerate(user.items,start=1):
         print(f"{i}) {item}")
 
+def exit_program():
+    print("Lagra avslutat")
+    sys.exit()
+
 def main_menu():
     print_start()
     match ask_user_choice({"l":"Log in","q":"Quit"}):
         case "l":
             return "LOGIN"
         case "q":
-            sys.exit("Lagra avslutat")
+            exit_program()
    
 def login_menu(users:list[User])->tuple[str, User]:
     while True:
@@ -52,9 +56,9 @@ def login_menu(users:list[User])->tuple[str, User]:
                 return "DASHBOARD",user
         print("Invalid username or password")
         if ask_user_choice({"r":"Try again","q":"Quit"}) == "q":
-            sys.exit("Lagra avslutat")
+            exit_program()
             
-def dashboard(user)->str:
+def dashboard(user:User)->str:
     print("\nThese are your items")
     list_items(user)
     print("\nSelect an action")
@@ -63,7 +67,6 @@ def dashboard(user)->str:
             user.items.append(ask_user_question("Add item"))
             return "DASHBOARD"
         case "l":
-            list_items(user)
             return "DASHBOARD"
         case "q":
             return "MAIN"
@@ -80,7 +83,11 @@ def app_runner(users:list[User]):
                 state,user = login_menu(users)
                 logged_in_user = user
             case "DASHBOARD":
-                state = dashboard(logged_in_user)
+                if logged_in_user is not None:
+                    state = dashboard(logged_in_user)
+                else:
+                    state = "MAIN"
+                    continue
                 if state == "MAIN":
                     logged_in_user = None
 
