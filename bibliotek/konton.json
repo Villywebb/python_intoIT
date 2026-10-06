@@ -1,0 +1,31 @@
+[
+  {
+    "användarnamn": "admin",
+    "lösenord": "admin_lösen",
+    "roll": "admin",
+    "lista": []
+  },
+  {
+    "användarnamn": "Bernie",
+    "lösenord": "Bernie_lösen",
+    "roll": "gäst",
+    "lista": [
+      0
+    ]
+  },
+  {
+    "användarnamn": "pappa",
+    "lösenord": "pappa_lösen",
+    "roll": "gäst",
+    "lista": [
+      2,
+      5
+    ]
+  },
+  {
+    "användarnamn": "chef",
+    "lösenord": "chef_lösen",
+    "roll": "admin",
+    "lista": []
+  }
+]

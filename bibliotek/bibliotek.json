@@ -1,0 +1,38 @@
+[
+  {
+    "titel": "Harry Potter",
+    "författare": "J.K. Rowling",
+    "lånad": true,
+    "bok_id": 0
+  },
+  {
+    "titel": "Saganom ringen",
+    "författare": "J.R.R. Tolken",
+    "lånad": false,
+    "bok_id": 1
+  },
+  {
+    "titel": "Bröderna Lejonhjärta",
+    "författare": "Astrid Lindgren",
+    "lånad": true,
+    "bok_id": 2
+  },
+  {
+    "titel": "Det",
+    "författare": "Stephen King",
+    "lånad": false,
+    "bok_id": 3
+  },
+  {
+    "titel": "Pestens tid",
+    "författare": "Stephen King",
+    "lånad": false,
+    "bok_id": 4
+  },
+  {
+    "titel": "Frankeinstain",
+    "författare": "Marry Shelly",
+    "lånad": true,
+    "bok_id": 5
+  }
+]
