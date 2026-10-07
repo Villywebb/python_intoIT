@@ -93,7 +93,7 @@ def app_runner(users:list[User]):
 
 #prototype code, should be file import or something
 users = []
-users.append(User("vilmer","ICA",["Banan","Citron","Kiwi","Melon"]))
+users.append(User("vilmer","ICA",["Banan","Melon","Kiwi","Citron"])) #Hooja
 users.append(User("bernie","test",["Jacka","Mössa","Skor"]))
            
 app_runner(users)
